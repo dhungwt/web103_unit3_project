@@ -5,7 +5,7 @@ const router = express.Router();
 
 console.log("eventsController object looks like:", eventsController);
 
-router.get("/", eventsController.getevents);
+router.get("/", eventsController.getEvents);
 
 router.get("/:eventId", eventsController.getEventById);
 

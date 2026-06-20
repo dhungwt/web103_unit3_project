@@ -1,40 +1,56 @@
-import React, { useState, useEffect } from 'react'
-import Event from '../components/Event'
-import '../css/LocationEvents.css'
+import React, { useState, useEffect } from "react";
+import Event from "../components/Event";
+import "../css/LocationEvents.css";
+import LocationsAPI from "../services/LocationsAPI";
 
-const LocationEvents = ({index}) => {
-    const [location, setLocation] = useState([])
-    const [events, setEvents] = useState([])
+const LocationEvents = ({ index }) => {
+  const [location, setLocation] = useState({});
+  const [events, setEvents] = useState([]);
 
-    return (
-        <div className='location-events'>
-            <header>
-                <div className='location-image'>
-                    <img src={location.image} />
-                </div>
+  useEffect(()=>{
+const fetchLocationData = async () => {
+      try {
+        const data = await LocationsAPI.getLocationById(index);
+        if (data) {
+          setLocation(data);       
+          setEvents(data.events);  
+        }
+      } catch (error) {
+        console.error("Error fetching location events details:", error);
+      }
+    };
 
-                <div className='location-info'>
-                    <h2>{location.name}</h2>
-                    <p>{location.address}, {location.city}, {location.state} {location.zip}</p>
-                </div>
-            </header>
+    fetchLocationData();
+  }, [index])
 
-            <main>
-                {
-                    events && events.length > 0 ? events.map((event, index) =>
-                        <Event
-                            key={event.id}
-                            id={event.id}
-                            title={event.title}
-                            date={event.date}
-                            time={event.time}
-                            image={event.image}
-                        />
-                    ) : <h2><i className="fa-regular fa-calendar-xmark fa-shake"></i> {'No events scheduled at this location yet!'}</h2>
-                }
-            </main>
+  return (
+    <div className="location-events">
+      <header>
+       <div className="location-info">
+          <h2>{location.name}</h2>
         </div>
-    )
-}
+      </header>
 
-export default LocationEvents
+      <main>
+        {events && events.length > 0 ? (
+          events.map((event) => (
+            <Event
+              key={event.id}
+              name={event.name}
+              location={event.location}
+              duration={event.duration}
+              image={event.image}
+            />
+          ))
+        ) : (
+          <h2>
+            <i className="fa-regular fa-calendar-xmark fa-shake"></i>{" "}
+            {"No events scheduled at this location yet!"}
+          </h2>
+        )}
+      </main>
+    </div>
+  );
+};
+
+export default LocationEvents;
