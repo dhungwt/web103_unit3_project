@@ -38,7 +38,17 @@ const eventData = [
       "description":"A vibrant walk along a former strip of the Berlin Wall, famous for its lively Sunday flea markets, graffiti art, and outdoor karaoke.",
       "submittedBy":"Jason",
       "submittedOn":"2023-03-10T05:23:00"
-  }
+  },
+    {
+      "id": 5,
+      "name": "Discovery Park Promenade",
+      "location": "Seattle",
+      "duration": "1 hour",
+      "image":"https://tinyurl.com/ydpv2bt9",
+      "description":"Seattle's largest public park, featuring rugged sea cliffs, forest trails, active sand dunes, and the historic West Point Lighthouse.",
+      "submittedBy":"Isabel",
+      "submittedOn":"2023-02-14T12:32:00"
+  },
 
 ]
 
