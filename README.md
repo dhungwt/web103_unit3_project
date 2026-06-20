@@ -36,11 +36,17 @@ The following **additional** features are implemented:
 ## Video Walkthrough
 
 Here's a walkthrough of implemented required features:
+### 🚀 Render Dashboard & Deployment
+![Render Dashboard Walkthrough](https://github.com/dhungwt/web103_unit3_project/blob/main/Kapture%202026-06-13%20at%2023.29.07.gif?raw=true)
 
-<img src='http://i.imgur.com/link/to/your/gif/file.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+### 📊 PostgreSQL Database Queries
+![PSQL Queries](https://github.com/dhungwt/web103_unit3_project/blob/main/Kapture%202026-06-20%20at%2016.35.23.gif?raw=true)
+
+### 💻 Frontend Demo & Interactions
+![Frontend Demo](https://github.com/dhungwt/web103_unit3_project/blob/main/ezgif-89cf36d531c39b59.gif?raw=true)
 
 <!-- Replace this with whatever GIF tool you used! -->
-GIF created with ...  GIF tool here
+GIF created with ...  KAP
 <!-- Recommended tools:
 [Kap](https://getkap.co/) for macOS
 [ScreenToGif](https://www.screentogif.com/) for Windows
