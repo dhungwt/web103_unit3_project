@@ -1,6 +1,6 @@
 import { pool } from "../config/database.js";
 
-const getEvents = async (req, res, error) => {
+const getEvents = async (req, res) => {
   try {
     const results = await pool.query("SELECT * FROM events ORDER BY id ASC");
     res.status(200).json(results.rows);
@@ -9,10 +9,10 @@ const getEvents = async (req, res, error) => {
   }
 };
 
-const getEventById = async (req, res, error) => {
+const getEventById = async (req, res) => {
   try {
     const selectQuery = `
-      SELECT name, pricePoint, audience, image, description, submittedBy, submittedOn
+      SELECT name, location, duration, image, description, submittedBy, submittedOn
       FROM events
       WHERE id=$1
     `;

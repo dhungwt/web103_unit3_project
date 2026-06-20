@@ -1,24 +1,34 @@
 import { pool } from "../config/database.js";
 
-const getLocations = async (req, res, error) => {
+const getLocations = async (req, res) => {
   try {
-    const results = await pool.query("SELECT * FROM gifts ORDER BY id ASC");
+    const results = await pool.query("SELECT * FROM locations ORDER BY id ASC");
     res.status(200).json(results.rows);
   } catch (error) {
     res.status(409).json({ error: error.message });
   }
 };
 
-const getLocationById = async (req, res, error) => {
-  try {
-    const selectQuery = `
-      SELECT name, pricePoint, audience, image, description, submittedBy, submittedOn
-      FROM gifts
-      WHERE id=$1
-    `;
+const getLocationById = async (req, res) => {
+ try {
     const locationId = req.params.locationId;
-    const results = await pool.query(selectQuery, [locationId]);
-    res.status(200).json(results.rows[0]);
+    
+    // location from locations table
+    const locationResult = await pool.query("SELECT name FROM locations WHERE id=$1", [locationId]);
+    const locationName = locationResult.rows[0]?.name;
+
+    if (!locationName) {
+      return res.status(404).json({ error: "Location not found" });
+    }
+
+    // all events in a location
+    const eventsResult = await pool.query("SELECT * FROM events WHERE location=$1", [locationName]);
+    
+    // Return both the location name and its events to the frontend
+    res.status(200).json({
+      name: locationName,
+      events: eventsResult.rows
+    });
   } catch (error) {
     res.status(409).json({ error: error.message });
   }
